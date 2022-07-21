@@ -1,17 +1,17 @@
 import GwenoreEvent, { CollectGoldEventData } from "../../types/event";
 import { LOGTYPE } from "../../types/log";
 import { ProcessResult, RESULTS } from "../../types/process";
-import { QuestConfig } from "../../types/quests";
+import { SerializableQuest } from "../../types/quests";
 import RedisService from "../database/redis";
 import Logger from "../logger/logger";
 import BaseProcessor from "./base-processor";
 
 export default class CollectGoldProcessor extends BaseProcessor {
     constructor(event: GwenoreEvent) {
-        super(event);
+        super(event, 'collect-gold');
     }
 
-    async process(config: QuestConfig): Promise<ProcessResult> {
+    async process(config: SerializableQuest): Promise<ProcessResult> {
         try{
             await this.init();
 
@@ -33,7 +33,7 @@ export default class CollectGoldProcessor extends BaseProcessor {
         }
     }
 
-    async decideProcessResult(config: QuestConfig): Promise<RESULTS> {
+    async decideProcessResult(config: SerializableQuest): Promise<RESULTS> {
         const global_key = `global_${this.event.characterId}_${this.event.name}`;
         const sum = this.event.data.rewards.reduce((acc, cur) => acc + cur.value, 0);
         const newamount = parseInt(this.globalEntry) + sum;

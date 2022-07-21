@@ -1,12 +1,10 @@
 import GwenoreEvent from "../types/event";
 import { LOGTYPE } from "../types/log";
-import { QuestConfig } from "../types/quests";
 import { QuestCountRequest } from "../types/requests";
 import MongoService from "./database/connection";
 import DailyQuestDecider from "./deciders/dailyquest-decider";
 import QuestDecider from "./deciders/base-decider";
 import Logger from "./logger/logger";
-import QuestFactory from "./quest/questfactory";
 import Space from "./space/space";
 import RedisService from "./database/redis";
 

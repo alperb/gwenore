@@ -1,13 +1,16 @@
 import GwenoreEvent from "../../types/event";
 import { ProcessResult, RESULTS } from "../../types/process";
-import { QuestConfig } from "../../types/quests";
+import { SerializableQuest } from "../../types/quests";
 import RedisService from "../database/redis";
 
 export default abstract class BaseProcessor {
     event: GwenoreEvent;
     globalEntry!: string;
-    constructor(event: GwenoreEvent) {
+    prefix: string;
+
+    constructor(event: GwenoreEvent, prefix: string) {
         this.event = event;
+        this.prefix = prefix;
     }
 
     async init() {
@@ -16,7 +19,7 @@ export default abstract class BaseProcessor {
         this.globalEntry = await RedisService.get(global_key);
     }
 
-    abstract decideProcessResult(config: QuestConfig): Promise<RESULTS>;
-    abstract process(config: QuestConfig): Promise<ProcessResult>;
+    abstract decideProcessResult(config: SerializableQuest): Promise<RESULTS>;
+    abstract process(config: SerializableQuest): Promise<ProcessResult>;
     abstract increment(types: string[]): Promise<void>;
 }

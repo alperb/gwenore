@@ -1,7 +1,9 @@
-export interface QuestConfig {
+import {SingleRarityDailyQuestType} from "../gwenore/config/daily";
+
+export interface DailyQuestConfig {
     id: string;
     name: string;
-    required: number;
+    rarities: SingleRarityDailyQuestType[];
 }
 
 export interface SerializableQuest {
