@@ -15,13 +15,13 @@ export default class MongoService {
             if(!MongoService.isConnected){
 
                 // TODO: remove comments here when you are ready to use the real mongo connection
-                // MongoService.connectionOptions = {
-                //     tlsCertificateKeyFile: MongoService.certFile,
-                //     serverSelectionTimeoutMS: 5000
-                // }
-                // MongoService.client = new MongoClient(process.env.MONGO_URL as string, MongoService.connectionOptions);
+                MongoService.connectionOptions = {
+                    tlsCertificateKeyFile: MongoService.certFile,
+                    serverSelectionTimeoutMS: 5000
+                }
+                MongoService.client = new MongoClient(process.env.MONGO_URL as string, MongoService.connectionOptions);
     
-                // await MongoService.client.connect();
+                await MongoService.client.connect();
                 MongoService.isConnected = true;
                 Logger.log(LOGTYPE.INFO, "MongoDB connected");
             }

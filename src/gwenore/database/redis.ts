@@ -1,15 +1,31 @@
 import moment from 'moment';
+import Logger from '../logger/logger';
 import { createClient } from 'redis';
+import { LOGTYPE } from '../../types/log';
 
 export default class RedisService {
     static client: any;
+    static isConnected = false;
 
     static async connect(){
-        RedisService.client = createClient({
-            url: 'rediss://alper:57b29025bdc04a5abf26b289ad6f21e5@eu2-proud-lamb-30511.upstash.io:30511'
-          });
-        await RedisService.client.connect();
-        RedisService.client.on('error', (err: unknown) => console.log('Redis Client Error', err));
+        try{
+            if(!RedisService.isConnected){
+
+                RedisService.client = createClient({
+                    url: process.env.REDIS_URI as string
+                });
+                await RedisService.client.connect();
+                RedisService.client.on('error', (err: unknown) => console.log('Redis Client Error', err));
+
+                RedisService.isConnected = true;
+                Logger.log(LOGTYPE.INFO, "Redis connected");
+            }
+        }
+        catch(e){
+            Logger.log(LOGTYPE.ERROR, "Redis connection error", e);
+        }
+        
+        
     }
 
     static async get(key: string): Promise<string> {
