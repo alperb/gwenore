@@ -526,4 +526,14 @@ const config: DailyQuestConfigType = {
         
     }
 }
-export default config;
+
+const rewards = [
+    [
+        {
+            type: 'item',
+            code: ''
+        }
+    ]
+]
+
+export default {QuestConfig: config, QuestRewards: rewards};

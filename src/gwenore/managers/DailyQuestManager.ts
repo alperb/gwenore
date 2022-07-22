@@ -1,8 +1,8 @@
 import { SerializableQuest } from "../../types/quests";
 import { Player, SetQuestResult, GetQuestResult } from "../../types/types";
-import Gwenore from "../Gwenore";
+import Gwenore from "../gwenore";
 import BaseManager from "./BaseManager"
-import QuestConfig from '../config/daily';
+import DQConfig from '../config/daily';
 import { LOGTYPE } from "../../types/log";
 import RedisService from "../database/RedisService";
 import DailyQuestDecider from "../deciders/DailyQuestDecider";
@@ -17,9 +17,7 @@ export default class DailyQuestManager extends BaseManager {
         this.decider = new DailyQuestDecider();
         Gwenore.Events.on("dailyquestComplete", (result: ProcessResult) => this.handleDailyQuestComplete(result));
         this.generateRandomQuests();
-        console.log('\n\n\n\n');
         console.log(Gwenore.Space.getCurrentQuests());
-        console.log('\n\n\n\n');
     }
 
     private async handleDailyQuestComplete(result: ProcessResult){
@@ -58,13 +56,13 @@ export default class DailyQuestManager extends BaseManager {
         if(Object.keys(Gwenore.Space.getCurrentQuests()).length !== 0) return Gwenore.Space.getCurrentQuests();
 
         const questList: Record<string, SerializableQuest> = {};
-        for(let i = 0; i < Object.keys(QuestConfig.types).length; i++){
-            let randomKey = this.getRandomKeyFrom(QuestConfig.types);
+        for(let i = 0; i < 7; i++){
+            let randomKey = this.getRandomKeyFrom(DQConfig.QuestConfig.types);
             while(questList[randomKey] !== undefined){
-                randomKey = this.getRandomKeyFrom(QuestConfig.types);
+                randomKey = this.getRandomKeyFrom(DQConfig.QuestConfig.types);
             }
-            const randomized = Math.floor(Math.random() * QuestConfig.types[randomKey].rarities[i].quests.length);
-            questList[randomKey] = {type: randomKey, ...QuestConfig.types[randomKey].rarities[i].quests[randomized]};
+            const randomized = Math.floor(Math.random() * DQConfig.QuestConfig.types[randomKey].rarities[i].quests.length);
+            questList[randomKey] = {type: randomKey, ...DQConfig.QuestConfig.types[randomKey].rarities[i].quests[randomized]};
         }
         Gwenore.Space.setCurrentQuests(questList);
         return questList;
@@ -77,6 +75,7 @@ export default class DailyQuestManager extends BaseManager {
 
             // we must set only one quest if player doesnt have any
             const playerPremium = await Gwenore.getPlayerPremiumStatus(player);
+            console.log({playerPremium});
             // if player has premium subscription we must set quests up to his type of rarity
 
             const settingQuests: Record<string, unknown> = {};

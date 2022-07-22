@@ -6,7 +6,7 @@ import DailyQuestHandler from "../handlers/DailyQuestHandler";
 
 export default class DailyQuestDecider extends BaseDecider {
     decide(event: GwenoreEvent): BaseHandler | undefined {
-        for(const quest of Object.keys(DailyQuestConfig.types)){
+        for(const quest of Object.keys(DailyQuestConfig.QuestConfig.types)){
             const splitted = quest.split('.');
             if(splitted[0] === event.name){
                 return new DailyQuestHandler(event);

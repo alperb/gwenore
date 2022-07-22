@@ -40,7 +40,7 @@ export default class MongoService {
 
     static async getPlayerPremiumStatus(player: Player){
         const db = await MongoService.getInstance();
-        const collection = db.db('gwenore').collection('players');
+        const collection = db.db('valenia').collection('players');
         const playerData = await collection.findOne({snowflake: player.snowflake});
         return (playerData as IPlayer).subscription.isActive ? (playerData as WithId<IPlayer>).subscription.current.type : -1;
     }

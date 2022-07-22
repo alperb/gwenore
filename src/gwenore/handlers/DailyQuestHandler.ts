@@ -3,7 +3,7 @@ import { RESULTS } from "../../types/process";
 import { QuestConfig, SerializableQuest } from "../../types/quests";
 import { Player, QUESTTYPE } from "../../types/types";
 import RedisService from "../database/RedisService";
-import Gwenore from "../Gwenore";
+import Gwenore from "../gwenore";
 import BaseHandler from "./BaseHandler";
 
 export default class DailyQuestHandler extends BaseHandler {

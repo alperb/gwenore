@@ -15,7 +15,7 @@ export default class RedisService {
                     url: process.env.REDIS_URI as string
                 });
                 await RedisService.client.connect();
-                RedisService.client.on('error', (err: unknown) => console.log('Redis Client Error', err));
+                RedisService.client.on('error', (err: unknown) => ServiceLogger.log(LOGTYPE.ERROR, `Redis client connection failed`, err));
 
                 RedisService.isConnected = true;
                 ServiceLogger.log(LOGTYPE.INFO, "Redis connected");
