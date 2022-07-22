@@ -2,7 +2,7 @@ import { SerializableQuest } from "../../types/quests";
 import { Player, SetQuestResult, GetQuestResult } from "../../types/types";
 import Gwenore from "../gwenore";
 import BaseManager from "./BaseManager"
-import DQConfig from '../config/daily';
+import QuestConfig from '../config/daily.json';
 import { LOGTYPE } from "../../types/log";
 import RedisService from "../database/RedisService";
 import DailyQuestDecider from "../deciders/DailyQuestDecider";
@@ -57,12 +57,12 @@ export default class DailyQuestManager extends BaseManager {
 
         const questList: Record<string, SerializableQuest> = {};
         for(let i = 0; i < 7; i++){
-            let randomKey = this.getRandomKeyFrom(DQConfig.QuestConfig.types);
+            let randomKey = this.getRandomKeyFrom(QuestConfig.types);
             while(questList[randomKey] !== undefined){
-                randomKey = this.getRandomKeyFrom(DQConfig.QuestConfig.types);
+                randomKey = this.getRandomKeyFrom(QuestConfig.types);
             }
-            const randomized = Math.floor(Math.random() * DQConfig.QuestConfig.types[randomKey].rarities[i].quests.length);
-            questList[randomKey] = {type: randomKey, ...DQConfig.QuestConfig.types[randomKey].rarities[i].quests[randomized]};
+            const randomized = Math.floor(Math.random() * QuestConfig.types[randomKey].rarities[i].quests.length);
+            questList[randomKey] = {type: randomKey, ...QuestConfig.types[randomKey].rarities[i].quests[randomized]};
         }
         Gwenore.Space.setCurrentQuests(questList);
         return questList;

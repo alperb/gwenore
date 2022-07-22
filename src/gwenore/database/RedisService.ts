@@ -12,7 +12,7 @@ export default class RedisService {
             if(!RedisService.isConnected){
 
                 RedisService.client = createClient({
-                    url: process.env.REDIS_URI as string
+                    url: process.env.REDIS_URI as string,
                 });
                 await RedisService.client.connect();
                 RedisService.client.on('error', (err: unknown) => ServiceLogger.log(LOGTYPE.ERROR, `Redis client connection failed`, err));

@@ -41,6 +41,9 @@ export default class ServiceLogger {
             printing += '\n' + chalk.red(JSON.stringify(log.details));
         }
         console.log(printing);
+        if(log.error){
+            console.error(log.error);
+        }
     }
 
     static log(type: LOGTYPE, message: string, ..._args: unknown[]): Log {
