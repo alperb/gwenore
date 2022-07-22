@@ -1,6 +1,7 @@
 import GwenoreEvent from "../../types/event";
 import BaseProcessor from "../processors/BaseProcessor";
-import CollectGoldProcessor from "../processors/CollectGold";
+import CollectGoldProcessor from "../processors/CollectGoldProcessor";
+import DuelProcessor from "../processors/DuelProcessor";
 import HuntProcessor from "../processors/HuntProcessor";
 import LootProcessor from "../processors/LootProcessor";
 
@@ -9,7 +10,8 @@ export default abstract class BaseHandler {
     processors: Record<string, BaseProcessor> = {
         'collect-gold': new CollectGoldProcessor(),
         'hunt': new HuntProcessor(),
-        'loot': new LootProcessor()
+        'loot': new LootProcessor(),
+        'duel': new DuelProcessor()
     };
     constructor(event: GwenoreEvent){
         this.event = event;

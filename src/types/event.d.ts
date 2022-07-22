@@ -6,12 +6,32 @@ export default interface GwenoreEvent {
     channelId: string,
     snowflake: string,
     guildId: string,
-    data: CollectGoldEventData | CollectExperienceEventData | HuntEventData | LootEventData,
+    data: CollectGoldEventData | CollectExperienceEventData | HuntEventData | LootEventData | DuelEventData,
     timestamp: number
 }
 
 export const enum EVENTTYPE {
     DAILYQUEST = "dailyquest"
+}
+
+// Duel Event Types
+export interface DuelEventData {
+    autoFeatures: AutoFeaturesResult;
+    isRandom: boolean;
+    league: Record<string, unknown>;
+    result: DuelResultData;
+    stats: SkillUseCounts[][],
+    teams: DuelPlayerData[][];
+}
+
+export interface DuelPlayerData {
+    snowflake: string;
+    id: string;
+}
+
+export interface DuelResultData {
+    winner: number;
+    reason: string;
 }
 
 // Loot Event Types

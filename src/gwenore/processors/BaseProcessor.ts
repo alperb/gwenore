@@ -19,12 +19,20 @@ export default abstract class BaseProcessor {
         else return parseInt(progress);
     }
 
+    private isConditionedQuest(condition: string){
+        return this.quest.type.split('.').includes(condition);
+    }
+
     protected isRarityBased(): boolean {
-        return this.quest.type.includes('rarity');
+        return this.isConditionedQuest('rarity');
+    }
+
+    protected isWinBased(): boolean {
+        return this.isConditionedQuest('win');
     }
 
     protected isIdBased(){
-        return this.quest.type.includes('id');
+        return this.isConditionedQuest('id');
     }
     
     async process(): Promise<ProcessResult> {
