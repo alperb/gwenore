@@ -1,10 +1,11 @@
 import { Kafka, logLevel, Consumer, Producer } from 'kafkajs';
 import { LOGTYPE } from '../../types/log';
-import Logger from '../logger/logger';
+import ServiceLogger from '../logger/logger';
 
 export default class KafkaService {
     static kafka: Kafka;
     static consumer: Consumer;
+    static testproducer: Producer;
     static producer: Producer;
 
     static async connect(){
@@ -21,14 +22,22 @@ export default class KafkaService {
         });
         KafkaService.consumer = KafkaService.kafka.consumer({ groupId: 'harvesters' });
         await KafkaService.consumer.connect()
-        Logger.log(LOGTYPE.INFO, "Kafka consumer connected.");
+        ServiceLogger.log(LOGTYPE.INFO, "Kafka consumer connected.");
         await KafkaService.consumer.subscribe({ topic: 'gwenore-harvester', fromBeginning: true })
-        Logger.log(LOGTYPE.INFO, "Kafka consumer subscribed to topic `gwenore-harvester`.");
+        ServiceLogger.log(LOGTYPE.INFO, "Kafka consumer subscribed to topic `gwenore-harvester`.");
     }
 
     static async createTestProducer(){
+        KafkaService.testproducer = KafkaService.kafka.producer();
+        await KafkaService.testproducer.connect();
+        ServiceLogger.log(LOGTYPE.DEBUG, "Kafka test producer connected.");
+        return KafkaService.testproducer;
+    }
+    
+    static async createProducer(){
         KafkaService.producer = KafkaService.kafka.producer();
         await KafkaService.producer.connect();
+        ServiceLogger.log(LOGTYPE.INFO, "Kafka Valenia producer connected.");
         return KafkaService.producer;
     }
 }

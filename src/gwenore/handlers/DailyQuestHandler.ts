@@ -1,8 +1,9 @@
 import GwenoreEvent from "../../types/event";
 import { ProcessResult } from "../../types/process";
 import { QuestConfig, SerializableQuest } from "../../types/quests";
-import { Player } from "../../types/types";
-import RedisService from "../database/redis";
+import { Player, QUESTTYPE } from "../../types/types";
+import RedisService from "../database/RedisService";
+import Gwenore from "../Gwenore";
 import BaseHandler from "./BaseHandler";
 
 export default class DailyQuestHandler extends BaseHandler {
@@ -25,7 +26,11 @@ export default class DailyQuestHandler extends BaseHandler {
 
         for(const eventtype of Object.keys(quests)){
             const splitted = eventtype.split(".");
-            if(this.event.name === splitted[0]){
+
+            const player = {snowflake: this.event.snowflake, characterId: this.event.characterId};
+            const doesPlayerHaveQuest = await Gwenore.checkIfPlayerHasQuest(QUESTTYPE.DAILYQUEST, player, eventtype);
+
+            if(doesPlayerHaveQuest && this.event.name === splitted[0]){
                 const processor = this.processors[splitted[0]];
                 processor.init(this.event, quests[eventtype]);
                 results.push(processor.process());

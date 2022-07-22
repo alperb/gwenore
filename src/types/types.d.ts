@@ -15,3 +15,7 @@ export interface GetQuestResult {
     quests?: SerializableQuest[];
     error?: unknown
 }
+
+export const enum QUESTTYPE {
+    DAILYQUEST = 'dailyquest'
+}

@@ -1,7 +1,7 @@
 import moment from 'moment';
-import Logger from '../logger/logger';
 import { createClient } from 'redis';
 import { LOGTYPE } from '../../types/log';
+import ServiceLogger from '../logger/logger';
 
 export default class RedisService {
     static client: any;
@@ -18,11 +18,11 @@ export default class RedisService {
                 RedisService.client.on('error', (err: unknown) => console.log('Redis Client Error', err));
 
                 RedisService.isConnected = true;
-                Logger.log(LOGTYPE.INFO, "Redis connected");
+                ServiceLogger.log(LOGTYPE.INFO, "Redis connected");
             }
         }
         catch(e){
-            Logger.log(LOGTYPE.ERROR, "Redis connection error", e);
+            ServiceLogger.log(LOGTYPE.ERROR, "Redis connection error", e);
         }
         
         

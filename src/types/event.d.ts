@@ -6,12 +6,39 @@ export default interface GwenoreEvent {
     channelId: string,
     snowflake: string,
     guildId: string,
-    data: CollectGoldEventData | CollectExperienceEventData | HuntEventData,
+    data: CollectGoldEventData | CollectExperienceEventData | HuntEventData | LootEventData,
     timestamp: number
 }
 
 export const enum EVENTTYPE {
     DAILYQUEST = "dailyquest"
+}
+
+// Loot Event Types
+export interface LootEventData {
+    result: boolean,
+    rewards?: Record<string, unknown>;
+    player: Player;
+    chest: ChestData;
+}
+
+export interface ChestData {
+    id: string;
+    loot?: unknown[];
+    passcode: string;
+    rarity: number;
+    status: ChestStatusData;
+}
+
+export interface ChestStatusData {
+    opendate: number,
+    opener: {
+        snowflake: string;
+    },
+    channel: string;
+    currently: string;
+    guild: string;
+    isPremium: boolean;
 }
 
 // Hunt Event Types

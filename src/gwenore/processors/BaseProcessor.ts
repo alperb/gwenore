@@ -1,7 +1,7 @@
 import GwenoreEvent from "../../types/event";
 import { ProcessResult } from "../../types/process";
 import { SerializableQuest } from "../../types/quests";
-import RedisService from "../database/redis";
+import RedisService from "../database/RedisService";
 
 export default abstract class BaseProcessor {
     event!: GwenoreEvent;

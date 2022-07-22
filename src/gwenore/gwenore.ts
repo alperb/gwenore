@@ -1,24 +1,33 @@
 import GwenoreEvent from "../types/event";
 import { LOGTYPE } from "../types/log";
 import { QuestCountRequest } from "../types/requests";
-import MongoService from "./database/connection";
-import Logger from "./logger/logger";
+import MongoService from "./database/MongoService";
 import Space from "./space/space";
-import RedisService from "./database/redis";
+import RedisService from "./database/RedisService";
 import DailyQuestManager from "./managers/DailyQuestManager";
 import BaseManager from "./managers/BaseManager";
+import { Player, QUESTTYPE } from "../types/types";
+import ServiceLogger from "./logger/logger";
+import {EventEmitter} from 'events';
 
-export default class Gwenore {
-    static MongoService: MongoService = MongoService;
+export default class Gwenore extends EventEmitter {
     static Space: Space = new Space();
     static managers: Record<string,BaseManager> = {
         'dailyquest': new DailyQuestManager()
     };
     
     static async init() {
-        Logger.log(LOGTYPE.INFO, "Gwenore started");
+        ServiceLogger.log(LOGTYPE.INFO, "Gwenore started");
         MongoService.connect();
         RedisService.connect();
+    }
+
+    static getPlayerPremiumStatus(player: Player){
+        return MongoService.getPlayerPremiumStatus(player);
+    }
+
+    static checkIfPlayerHasQuest(questtype: QUESTTYPE, player: Player, questid: string){
+        return Gwenore.managers[questtype].checkIfPlayerHasQuest(player, questid);
     }
 
     static async ensureQuestExistence(event: GwenoreEvent){

@@ -1,7 +1,9 @@
 import { config } from "dotenv";
-import { MongoClient, MongoClientOptions } from "mongodb";
+import { Document, MongoClient, MongoClientOptions, WithId } from "mongodb";
 import { LOGTYPE } from "../../types/log";
-import Logger from "../logger/logger";
+import { Player } from "../../types/types";
+import ServiceLogger from "../logger/logger";
+
 config();
 
 export default class MongoService {
@@ -23,11 +25,11 @@ export default class MongoService {
     
                 await MongoService.client.connect();
                 MongoService.isConnected = true;
-                Logger.log(LOGTYPE.INFO, "MongoDB connected");
+                ServiceLogger.log(LOGTYPE.INFO, "MongoDB connected");
             }
         }
         catch(e){
-            Logger.log(LOGTYPE.ERROR, "MongoDB connection error", e);
+            ServiceLogger.log(LOGTYPE.ERROR, "MongoDB connection error", e);
         }
     }
 
@@ -38,4 +40,24 @@ export default class MongoService {
         return MongoService.client;
     }
 
+    static async getPlayerPremiumStatus(player: Player){
+        const db = await MongoService.getInstance();
+        const collection = db.db('gwenore').collection('players');
+        const playerData = await collection.findOne({snowflake: player.snowflake});
+        return (playerData as IPlayer).subscription.isActive ? (playerData as WithId<IPlayer>).subscription.current.type : -1;
+    }
+
+}
+
+export interface IPlayer extends WithId<Document> {
+    snowflake: string;
+    subscription: {
+        current: {
+            end: number;
+            start: number;
+            type: number;
+        },
+        history: unknown[],
+        isActive: boolean;
+    };
 }

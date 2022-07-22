@@ -1,10 +1,10 @@
-import Mongo from '../database/connection';
+import Mongo from '../database/MongoService';
 import { MongoClient } from "mongodb";
 import chalk from 'chalk';
 import Log, {LOGTYPE} from '../../types/log';
 import moment from 'moment';
 
-export default class Logger {
+export default class ServiceLogger {
     mongo!: MongoClient;
     constructor(){
         this.init();
@@ -51,7 +51,7 @@ export default class Logger {
             error: _args[0] as Error,
             details: _args
         };
-        Logger.print(log);
+        ServiceLogger.print(log);
         return log;
     }
 }

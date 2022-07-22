@@ -207,8 +207,126 @@ const config: DailyQuestConfigType = {
             ]
         },
 
-        // "loot.by.rarity": {},
-        // "loot.by.count": {},
+        "loot.by.rarity": {
+            "rarities": [
+                {
+                    "quests": [
+                        {
+                            "id": "loot.10.common",
+                            "name": "Loot 10 Common Chests"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "loot.10.uncommon",
+                            "name": "Loot 10 Uncommon Chests"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "loot.10.rare",
+                            "name": "Loot 10 Rare Chests"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "loot.10.epic",
+                            "name": "Loot 10 Epic Chests"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "loot.10.legendary",
+                            "name": "Loot 10 Legendary Chests"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "loot.10.mythic",
+                            "name": "Loot 10 Mythic Chests"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "loot.10.ultimate",
+                            "name": "Loot 10 Ultimate Chests"
+                        }
+                    ]
+                },
+            ]
+        },
+        "loot.by.count": {
+            "rarities": [
+                {
+                    "quests": [
+                        {
+                            "id": "loot.10",
+                            "name": "Loot 10 Chests"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "loot.15",
+                            "name": "Loot 15 Chests"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "loot.25",
+                            "name": "Loot 25 Chests"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "loot.35",
+                            "name": "Loot 35 Chests"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "loot.50",
+                            "name": "Loot 50 Chests"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "loot.75",
+                            "name": "Loot 75 Chests"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "loot.100",
+                            "name": "Loot 100 Chests"
+                        }
+                    ]
+                },
+            ]
+        },
 
         // "duel.by.count": {},
 

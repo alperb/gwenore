@@ -1,6 +1,6 @@
 import { CollectGoldEventData } from "../../types/event";
 import { ProcessResult, RESULTS } from "../../types/process";
-import RedisService from "../database/redis";
+import RedisService from "../database/RedisService";
 import BaseProcessor from "./BaseProcessor";
 
 export default class CollectGoldProcessor extends BaseProcessor {
