@@ -1,14 +1,14 @@
 import { SerializableQuest } from "../../types/quests";
 
 export default class Space {
-    space: Map<string, SerializableQuest>;
-    currentQuests: SerializableQuest[];
+    space: Map<string, boolean>;
+    currentQuests: Record<string, SerializableQuest>;
     constructor(){
         this.space = new Map();
-        this.currentQuests = [];
+        this.currentQuests = {};
     }
 
-    setDailyQuests(quests: SerializableQuest[]){
+    setDailyQuests(quests: Record<string, SerializableQuest>){
         this.currentQuests = quests;
     }
 

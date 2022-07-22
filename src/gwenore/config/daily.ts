@@ -86,8 +86,126 @@ const config: DailyQuestConfigType = {
                 }
             ]
         },
-        // "hunt.by.rarity": {},
-        // "hunt.by.count": {},
+        "hunt.by.rarity": {
+            "rarities": [
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.10.common",
+                            "name": "Hunt 10 Common Units"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.10.uncommon",
+                            "name": "Hunt 10 Uncommon Units"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.10.rare",
+                            "name": "Hunt 10 Rare Units"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.10.epic",
+                            "name": "Hunt 10 Epic Units"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.10.legendary",
+                            "name": "Hunt 10 Legendary Units"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.10.mythic",
+                            "name": "Hunt 10 Mythic Units"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.10.ultimate",
+                            "name": "Hunt 10 Ultimate Units"
+                        }
+                    ]
+                },
+            ]
+        },
+        "hunt.by.count": {
+            "rarities": [
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.10",
+                            "name": "Hunt 10 Units"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.15",
+                            "name": "Hunt 15 Units"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.25",
+                            "name": "Hunt 25 Units"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.35",
+                            "name": "Hunt 35 Units"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.50",
+                            "name": "Hunt 50 Units"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.75",
+                            "name": "Hunt 75 Units"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "hunt.100",
+                            "name": "Hunt 10 Units"
+                        }
+                    ]
+                },
+            ]
+        },
 
         // "loot.by.rarity": {},
         // "loot.by.count": {},
@@ -99,14 +217,6 @@ const config: DailyQuestConfigType = {
                 {
                     "quests": [
                         {
-                            "id": "collect-gold.100",
-                            "name": "Collect 100 gold"
-                        }
-                    ]
-                },
-                {
-                    "quests": [
-                        {
                             "id": "collect-gold.1000",
                             "name": "Collect 1000 gold"
                         }
@@ -115,8 +225,40 @@ const config: DailyQuestConfigType = {
                 {
                     "quests": [
                         {
+                            "id": "collect-gold.2500",
+                            "name": "Collect 2.500 gold"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-gold.5000",
+                            "name": "Collect 5.000 gold"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
                             "id": "collect-gold.10000",
-                            "name": "Collect 10000 gold"
+                            "name": "Collect 10.000 gold"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-gold.20000",
+                            "name": "Collect 20.000 gold"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-gold.50000",
+                            "name": "Collect 50.000 gold"
                         }
                     ]
                 },
@@ -124,31 +266,7 @@ const config: DailyQuestConfigType = {
                     "quests": [
                         {
                             "id": "collect-gold.100000",
-                            "name": "Collect 100000 gold"
-                        }
-                    ]
-                },
-                {
-                    "quests": [
-                        {
-                            "id": "collect-gold.1000000",
-                            "name": "Collect 1000000 gold"
-                        }
-                    ]
-                },
-                {
-                    "quests": [
-                        {
-                            "id": "collect-gold.10000000",
-                            "name": "Collect 10000000 gold"
-                        }
-                    ]
-                },
-                {
-                    "quests": [
-                        {
-                            "id": "collect-gold.100000000",
-                            "name": "Collect 100000000 gold"
+                            "name": "Collect 100.000 gold"
                         }
                     ]
                 }

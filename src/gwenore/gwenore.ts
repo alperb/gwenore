@@ -2,18 +2,18 @@ import GwenoreEvent from "../types/event";
 import { LOGTYPE } from "../types/log";
 import { QuestCountRequest } from "../types/requests";
 import MongoService from "./database/connection";
-import DailyQuestDecider from "./deciders/dailyquest-decider";
-import QuestDecider from "./deciders/base-decider";
 import Logger from "./logger/logger";
 import Space from "./space/space";
 import RedisService from "./database/redis";
+import DailyQuestManager from "./managers/DailyQuestManager";
+import BaseManager from "./managers/BaseManager";
 
 export default class Gwenore {
     static MongoService: MongoService = MongoService;
     static Space: Space = new Space();
-    static deciders: QuestDecider[] = [
-        new DailyQuestDecider()
-    ];
+    static managers: Record<string,BaseManager> = {
+        'dailyquest': new DailyQuestManager()
+    };
     
     static async init() {
         Logger.log(LOGTYPE.INFO, "Gwenore started");
@@ -21,35 +21,22 @@ export default class Gwenore {
         RedisService.connect();
     }
 
-    static async insertQuestsForPlayer(snowflake: string){
-        const quests = Gwenore.Space.currentQuests;
-        for(const quest of quests){
-            const quest_key = `dailyquests_${snowflake}_${quest.id}`;
-            await RedisService.set(quest_key, "0");
-        }
-    }
-
     static async ensureQuestExistence(event: GwenoreEvent){
-        const quests = Gwenore.Space.currentQuests;
-        for(const quest of quests){
-            const quest_key = `dailyquests_${event.snowflake}_${quest.id}`;
-            const playerquest = await RedisService.get(quest_key);
-            if(playerquest == null){
-                await RedisService.set(quest_key, "0");
-            }
-        }
-        
+        return (await Gwenore.managers['dailyquest'].isQuestsAvailable({snowflake: event.snowflake, characterId: event.characterId}));
     }
 
-    static process(request: QuestCountRequest){
-        Gwenore.ensureQuestExistence(request.event);
+    static async process(request: QuestCountRequest){
+        const doesQuestsExist = await Gwenore.ensureQuestExistence(request.event);
+        if(!doesQuestsExist){
+            await Gwenore.managers.dailyquest.setQuests({snowflake: request.event.snowflake, characterId: request.event.characterId});
+        }
 
 
         // get the handlers for the event
-        for(const decider of Gwenore.deciders){
-            const handler = decider.shouldProcess(request.event);
+        for(const managerkey of Object.keys(Gwenore.managers)){
+            const handler = Gwenore.managers[managerkey].decider.decide(request.event);
             if(handler){
-                handler.apply();
+                await handler.handle();
             }
         }
     }
