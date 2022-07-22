@@ -6,12 +6,46 @@ export default interface GwenoreEvent {
     channelId: string,
     snowflake: string,
     guildId: string,
-    data: CollectGoldEventData | CollectExperienceEventData | HuntEventData | LootEventData | DuelEventData,
+    data: CollectGoldEventData | CollectExperienceEventData | HuntEventData | LootEventData | DuelEventData | SellEventData | CollectItemEventData,
     timestamp: number
 }
 
 export const enum EVENTTYPE {
     DAILYQUEST = "dailyquest"
+}
+
+// Collect Item Types
+export interface CollectItemEventData {
+    rewardType: CollectRewardType;
+    rewards: CollectItemReward[];
+    source: CollectSource;
+}
+
+export const enum ITEMTYPE {
+    KEY = "dungeonkey",
+    WEAPON = 'weapon',
+    ARMOR = 'armor',
+    CHEST = 'chest',
+    SOULGEM = 'soulgem',
+}
+
+export interface CollectItemReward {
+    count: number;
+    item: {
+        rarity: number;
+        type: 'weapon' | 'armor';
+        [key:string]: unknown;
+    }
+    [key:string]: unknown;
+}
+
+// Sell Event Types
+export interface SellEventData {
+    sellingItems: unknown[2][];
+}
+
+export interface ProcessableSellingItem {
+    rarity: number;
 }
 
 // Duel Event Types
@@ -115,7 +149,8 @@ export const enum CollectSource {
 
 export const enum CollectRewardType {
     GOLD = 'gold',
-    EXP = 'exp'
+    EXP = 'exp',
+    ITEM = 'item',
 }
 
 export interface CollectExperienceRewardData {

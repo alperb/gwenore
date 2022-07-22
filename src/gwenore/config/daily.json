@@ -491,6 +491,246 @@
                     ]
                 }
             ]
+        },
+        "sell.by.count": {
+            "rarities": [
+                {
+                    "quests": [
+                        {
+                            "id": "sell.10",
+                            "name": "Sell 10 items"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "sell.15",
+                            "name": "Sell 15 Items"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "sell.25",
+                            "name": "Sell 25 Items"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "sell.35",
+                            "name": "Sell 35 Items"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "sell.50",
+                            "name": "Sell 50 Items"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "sell.75",
+                            "name": "Sell 75 Items"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "sell.100",
+                            "name": "Sell 100 Items"
+                        }
+                    ]
+                }
+            ]
+        },
+        "sell.by.rarity": {
+            "rarities": [
+                {
+                    "quests": [
+                        {
+                            "id": "sell.10.common",
+                            "name": "Sell 10 Common Items"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "sell.10.uncommon",
+                            "name": "Sell 10 Uncommon Items"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "sell.10.rare",
+                            "name": "Sell 10 Rare Items"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "sell.10.epic",
+                            "name": "Sell 10 Epic Items"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "sell.10.legendary",
+                            "name": "Sell 10 Legendary Items"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "sell.10.mythic",
+                            "name": "Sell 10 Mythic Items"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "sell.10.ultimate",
+                            "name": "Sell 10 Ultimate Items"
+                        }
+                    ]
+                }
+            ]
+        },
+        "collect-item.by.count": {
+            "rarities": [
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.10",
+                            "name": "Collect 10 Set Pieces"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.15",
+                            "name": "Collect 15 Set Pieces"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.25",
+                            "name": "Collect 25 Set Pieces"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.35",
+                            "name": "Collect 35 Set Pieces"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.50",
+                            "name": "Collect 50 Set Pieces"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.75",
+                            "name": "Collect 75 Set Pieces"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.100",
+                            "name": "Collect 100 Set Pieces"
+                        }
+                    ]
+                }
+            ]
+        },
+        "collect-item.by.rarity": {
+            "rarities": [
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.10.common",
+                            "name": "Collect 10 Common Set Pieces"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.10.uncommon",
+                            "name": "Collect 10 Uncommon Set Pieces"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.10.rare",
+                            "name": "Collect 10 Rare Set Pieces"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.10.epic",
+                            "name": "Collect 10 Epic Set Pieces"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.10.legendary",
+                            "name": "Collect 10 Legendary Set Pieces"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.10.mythic",
+                            "name": "Collect 10 Mythic Set Pieces"
+                        }
+                    ]
+                },
+                {
+                    "quests": [
+                        {
+                            "id": "collect-item.10.ultimate",
+                            "name": "Collect 10 Ultimate Set Pieces"
+                        }
+                    ]
+                }
+            ]
         }
     }
 }

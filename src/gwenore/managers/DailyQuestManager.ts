@@ -1,6 +1,6 @@
 import { SerializableQuest } from "../../types/quests";
 import { Player, SetQuestResult, GetQuestResult } from "../../types/types";
-import Gwenore from "../gwenore";
+import Gwenore from "../Gwenore";
 import BaseManager from "./BaseManager"
 import QuestConfig from '../config/daily.json';
 import { LOGTYPE } from "../../types/log";

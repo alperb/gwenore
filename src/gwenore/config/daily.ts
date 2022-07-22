@@ -14,14 +14,10 @@ export interface SingleDailyQuestType {
 import * as config from './daily.json';
 
 
-        // "sell.by.count": {},
-        // "sell.by.rarity": {},
+        
 
         // "clear-dungeon.by.count": {},
         // "clear-dungeon.by.rarity": {},
-
-        // "collect-item.by.count": {},
-        // "collect-item.by.rarity": {},
 
         // "repair.by.count": {},
 

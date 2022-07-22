@@ -10,7 +10,7 @@ export default class MongoService {
     static isConnected = false;
     static client: MongoClient;
     static connectionOptions: MongoClientOptions;
-    static certFile: string = (process.env.NODE_ENV == 'prod') ? (process.env.CERT_FILE as string) : (process.env.DEV_CERT_FILE as string);
+    static certFile: string = (process.env.CERT_FILE as string);
 
     static async connect(){
         try{
