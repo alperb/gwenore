@@ -15,8 +15,6 @@ export default class MongoService {
     static async connect(){
         try{
             if(!MongoService.isConnected){
-
-                // TODO: remove comments here when you are ready to use the real mongo connection
                 MongoService.connectionOptions = {
                     tlsCertificateKeyFile: MongoService.certFile,
                     serverSelectionTimeoutMS: 5000

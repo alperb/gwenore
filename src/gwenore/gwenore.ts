@@ -31,8 +31,8 @@ export default class Gwenore extends EventEmitter {
         return Gwenore.managers[questtype].checkIfPlayerHasQuest(player, questid);
     }
 
-    static async ensureQuestExistence(event: GwenoreEvent){
-        return (await Gwenore.managers['dailyquest'].isQuestsAvailable({snowflake: event.snowflake, characterId: event.characterId}));
+    static ensureQuestExistence(event: GwenoreEvent){
+        return Gwenore.managers['dailyquest'].isQuestsAvailable({snowflake: event.snowflake, characterId: event.characterId});
     }
 
     static async process(request: QuestCountRequest){
