@@ -12,7 +12,7 @@ export default class KafkaService {
         KafkaService.kafka = new Kafka({
             clientId: process.env.KAFKA_CLIENT as string,
             brokers: [process.env.KAFKA_BROKER as string],
-            logLevel: process.env.NODE_ENV == 'dev' ? logLevel.NOTHING : logLevel.NOTHING,
+            logLevel: process.env.NODE_ENV == 'dev' ? logLevel.DEBUG : logLevel.NOTHING,
             retry: {
                 initialRetryTime: 300,
                 retries: 3,
