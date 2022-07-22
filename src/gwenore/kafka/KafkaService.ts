@@ -1,6 +1,6 @@
 import { Kafka, logLevel, Consumer, Producer } from 'kafkajs';
 import { LOGTYPE } from '../../types/log';
-import ServiceLogger from '../logger/logger';
+import ServiceLogger from '../logger/ServiceLogger';
 
 export default class KafkaService {
     static kafka: Kafka;

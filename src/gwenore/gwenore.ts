@@ -7,12 +7,13 @@ import RedisService from "./database/RedisService";
 import DailyQuestManager from "./managers/DailyQuestManager";
 import BaseManager from "./managers/BaseManager";
 import { Player, QUESTTYPE } from "../types/types";
-import ServiceLogger from "./logger/logger";
-import {EventEmitter} from 'events';
+import ServiceLogger from "./logger/ServiceLogger";
+import { EventEmitter } from 'events';
 
 export default class Gwenore extends EventEmitter {
+    static Events = new EventEmitter();
     static Space: Space = new Space();
-    static managers: Record<string,BaseManager> = {
+    static managers: Record<string, BaseManager> = {
         'dailyquest': new DailyQuestManager()
     };
     

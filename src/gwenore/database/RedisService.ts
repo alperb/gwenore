@@ -1,10 +1,10 @@
 import moment from 'moment';
-import { createClient } from 'redis';
+import { createClient, RedisClientType } from 'redis';
 import { LOGTYPE } from '../../types/log';
-import ServiceLogger from '../logger/logger';
+import ServiceLogger from '../logger/ServiceLogger';
 
 export default class RedisService {
-    static client: any;
+    static client: RedisClientType;
     static isConnected = false;
 
     static async connect(){
@@ -24,8 +24,6 @@ export default class RedisService {
         catch(e){
             ServiceLogger.log(LOGTYPE.ERROR, "Redis connection error", e);
         }
-        
-        
     }
 
     static async get(key: string): Promise<string> {

@@ -2,7 +2,7 @@ import { config } from "dotenv";
 import { Document, MongoClient, MongoClientOptions, WithId } from "mongodb";
 import { LOGTYPE } from "../../types/log";
 import { Player } from "../../types/types";
-import ServiceLogger from "../logger/logger";
+import ServiceLogger from "../logger/ServiceLogger";
 
 config();
 

@@ -16,7 +16,7 @@ export default class ServiceLogger {
 
     static print(log: Log) {
         const time = moment(log.time).format('YYYY-MM-DD HH:mm:ss');
-        let printing = `${chalk.bold.gray(`[${time}]`)} `;
+        let printing = `${chalk.bold.gray('[' + time + ']')} `;
         switch (log.type) {
             case LOGTYPE.INFO:
                 printing += log.message;
