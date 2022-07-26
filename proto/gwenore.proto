@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package GwenorePackage;
+
+service Gwenore {
+    rpc getProgress(GetProgressRequest) returns (GetProgressResponse) {}
+}
+
+message GetProgressRequest {
+    string snowflake = 1;
+}
+
+message QuestProgress {
+    string id = 1;
+    string name = 2;
+    int64 current = 3;
+}
+
+message GetProgressResponse {
+    string status = 1;
+    optional string error = 2;
+    repeated QuestProgress progress = 3;
+}
