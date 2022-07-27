@@ -3,7 +3,7 @@ import * as grpc from '@grpc/grpc-js'
 import * as protoLoader from '@grpc/proto-loader'
 import { ProtoGrpcType } from '../proto.output/gwenore'
 import { GRPCService } from "../../types/grpc";
-import GwenoreServiceHandler from '../../service/gwenore';
+import GwenoreServiceHandler from '../../service/GwenoreServiceHandler';
 import ServiceLogger from '../../gwenore/logger/ServiceLogger';
 import { LOGTYPE } from '../../types/log';
 

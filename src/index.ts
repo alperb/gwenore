@@ -3,12 +3,12 @@ import Gwenore from './gwenore/Gwenore';
 
 import KafkaService from './gwenore/kafka/KafkaService';
 import ServiceLogger from './gwenore/logger/ServiceLogger';
-import { CollectRewardType, CollectSource, ITEMTYPE } from './types/event';
+import { CollectRewardType, CollectSource } from './types/event';
 import { LOGTYPE } from './types/log';
 import { QuestCountRequest } from './types/requests';
 
-import GwenoreService from './grpc/server/server';
-import GwenoreTestClient from './service/test-client';
+import GwenoreService from './grpc/server/GwenoreService';
+import GwenoreTestClient from './service/GwenoreTestClient';
 
 config();
 
