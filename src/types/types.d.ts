@@ -12,7 +12,7 @@ export interface SetQuestResult {
 
 export interface GetQuestResult {
     result: string;
-    quests?: SerializableQuest[];
+    quests?: Record<string, SerializableQuest>;
     error?: unknown
 }
 

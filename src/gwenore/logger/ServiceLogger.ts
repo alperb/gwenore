@@ -34,14 +34,11 @@ export default class ServiceLogger {
                 printing += log.message;
                 break;
         }
-        if(log.error){
-            printing += '\n' + chalk.red(log.error);
-        }
         if(log.details && log.details.length > 0){
-            printing += '\n' + chalk.red(JSON.stringify(log.details));
+            printing += '\n' + log.type === LOGTYPE.ERROR ? chalk.red(JSON.stringify(log.details)) : chalk.green(JSON.stringify(log.details));
         }
         console.log(printing);
-        if(log.error){
+        if(log.error && log.type === LOGTYPE.ERROR){
             console.error(log.error);
         }
     }

@@ -7,10 +7,15 @@ import { CollectRewardType, CollectSource, ITEMTYPE } from './types/event';
 import { LOGTYPE } from './types/log';
 import { QuestCountRequest } from './types/requests';
 
+import GwenoreService from './grpc/server/server';
+import GwenoreTestClient from './service/test-client';
+
 config();
 
+const service = new GwenoreService(process.env.GRPC_HOST as string, process.env.GRPC_PORT as unknown as number)
 const initializationProcesses = [
     Gwenore.init(),
+    service.start(),
     KafkaService.connect(),
     KafkaService.createProducer(),
     KafkaService.createTestProducer()
@@ -25,54 +30,21 @@ Promise.all(initializationProcesses).then(() => {
         },
     })
 
+    
+
     const req: QuestCountRequest = {
         event: {
-            "name" : "collect-item",
+            "name" : "collect-gold",
             "channelId" : "759437907491684384",
             "snowflake" : "181348050436882432",
             "characterId" : "a678cebe-d3ca-4804-bf33-9f858507d815",
             "guildId" : "759433456475570207",
             "data": {
-                "rewardType" : CollectRewardType.ITEM,
+                "rewardType" : CollectRewardType.GOLD,
                 "rewards" : [
                     {
-                        "type" : "key",
-                        "count" : 5.0,
-                        "item" : {
-                            "code" : "epic.dungeonkey",
-                            "isTradeable" : true,
-                            "rarity" : 0.0,
-                            "durability" : 100.0,
-                            "placement" : "none",
-                            "stats" : {
-
-                            },
-                            "set" : "",
-                            "soulbind" : {
-                                "isBindable" : false,
-                                "isBound" : false,
-                                "player" : {
-                                    "characterId" : "",
-                                    "snowflake" : ""
-                                },
-                                "date" : 0.0
-                            },
-                            "type" : ITEMTYPE.ARMOR,
-                            "emoji" : {
-                                "id" : "908078398734205019",
-                                "name" : "epic_dungeonkey"
-                            },
-                            "id" : "59274d1d-109f-40dc-9aa7-1596d65f1491",
-                            "image" : {
-                                "inventory" : "item/inventory-items/keys/epic_key.png",
-                                "original" : "item/utility/keys/epic_key.png"
-                            },
-                            "name" : "Epic Dungeon Key",
-                            "function" : [
-
-                            ],
-                            "stack" : 24.0
-                        }
+                        "type" : CollectRewardType.GOLD,
+                        "value": 100
                     }
                 ],
                 "source" : CollectSource.HUNT
@@ -87,6 +59,11 @@ Promise.all(initializationProcesses).then(() => {
         messages: [
             { value: JSON.stringify(req) }
         ]
+    })
+    const testClient = new GwenoreTestClient();
+    testClient.testGetProgress()
+    .then(r => {
+        console.log(r);
     })
 })
 
