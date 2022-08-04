@@ -1,7 +1,7 @@
 import { CollectItemEventData, ITEMTYPE } from "../../types/event";
 import BaseProcessor from "./BaseProcessor";
 
-export default class CollectGoldProcessor extends BaseProcessor {
+export default class CollectItemProcessor extends BaseProcessor {
 
     getIncrementInTermsOfQuest(): number {
         if(this.isRarityBased()){
@@ -12,8 +12,8 @@ export default class CollectGoldProcessor extends BaseProcessor {
 
     private getTotalItemCount(): number {
         return (this.event.data as CollectItemEventData).rewards.reduce((acc, reward) => {
-            if(reward.type === ITEMTYPE.ARMOR || reward.type === ITEMTYPE.WEAPON){
-                return acc + reward.count;
+            if(reward.item.type === ITEMTYPE.ARMOR || reward.item.type === ITEMTYPE.WEAPON){
+                return acc + ((reward.count as number) ?? 1);
             }
             return acc;
         }, 0);
@@ -26,10 +26,10 @@ export default class CollectGoldProcessor extends BaseProcessor {
 
     private getItemCountByRarity(): number {
         const requiredRarity = this.getRarityIndex();
-
+        console.log({event: (this.event.data as CollectItemEventData).rewards});
         return (this.event.data as CollectItemEventData).rewards.reduce((acc, reward) => {
-            if((requiredRarity === reward.item.rarity) && (reward.type === ITEMTYPE.ARMOR || reward.type === ITEMTYPE.WEAPON)){
-                return acc + reward.count;
+            if((requiredRarity === reward.item.rarity) && (reward.item.type === ITEMTYPE.ARMOR || reward.item.type === ITEMTYPE.WEAPON)){
+                return acc + ((reward.count as number) ?? 1);
             }
             return acc;
         }, 0);

@@ -2,7 +2,7 @@ import GwenoreEvent from "../types/event";
 import { LOGTYPE } from "../types/log";
 import { QuestCountRequest } from "../types/requests";
 import MongoService from "./database/MongoService";
-import Space from "./space/space";
+import Space from "./space/Space";
 import RedisService from "./database/RedisService";
 import DailyQuestManager from "./managers/DailyQuestManager";
 import BaseManager from "./managers/BaseManager";

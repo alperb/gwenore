@@ -41,10 +41,11 @@ export default abstract class BaseProcessor {
 
         // data comes a little bit unorganized so we need to sum it up
         const increment = this.getIncrementInTermsOfQuest();
+        console.log({increment});
 
         // set the new progress to redis
         const newProgress = current + increment;
-        await RedisService.set(`dailyquests_${this.event.snowflake}_${this.quest.id}`, newProgress.toString());
+        if(newProgress !== current) await RedisService.set(`dailyquests_${this.event.snowflake}_${this.quest.id}`, newProgress.toString());
 
         // check if the quest is completed in this progress step
         if(newProgress >= required && current < required){

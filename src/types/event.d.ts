@@ -30,7 +30,7 @@ export const enum ITEMTYPE {
 }
 
 export interface CollectItemReward {
-    count: number;
+    count?: number;
     item: {
         rarity: number;
         type: 'weapon' | 'armor';

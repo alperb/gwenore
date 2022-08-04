@@ -9,15 +9,39 @@ import DailyQuestDecider from "../deciders/DailyQuestDecider";
 import ServiceLogger from "../logger/ServiceLogger";
 import { ProcessResult } from "../../types/process";
 import KafkaService from "../kafka/KafkaService";
+import { QuestReward } from "../../types/rewards";
 
 export default class DailyQuestManager extends BaseManager {
     quests: Record<string, SerializableQuest> = {};
+    rewards: QuestReward[][] = [];
     constructor(){
         super();
         this.decider = new DailyQuestDecider();
         Gwenore.Events.on("dailyquestComplete", (result: ProcessResult) => this.handleDailyQuestComplete(result));
         this.generateRandomQuests();
+        this.rewards = [
+            [{type: 'item', itemid: 'common.itemscroll', amount: 1}, {type: 'item', itemid: 'common.gem-box', amount: 3}],
+            [{type: 'item', itemid: 'uncommon.itemscroll', amount: 1}, {type: 'item', itemid: 'uncommon.gem-box', amount: 3}],
+            [{type: 'item', itemid: 'rare.itemscroll', amount: 1}, {type: 'item', itemid: 'rare.gem-box', amount: 3}],
+            [{type: 'item', itemid: 'epic.itemscroll', amount: 1}, {type: 'item', itemid: 'epic.gem-box', amount: 3}],
+            [{type: 'item', itemid: 'legendary.itemscroll', amount: 1}, {type: 'item', itemid: 'legendary.gem-box', amount: 3}],
+            [{type: 'item', itemid: 'mythic.itemscroll', amount: 1}, {type: 'item', itemid: 'mythic.gem-box', amount: 3}],
+            [{type: 'item', itemid: 'ultimate.itemscroll', amount: 1}, {type: 'item', itemid: 'ultimate.gem-box', amount: 3}]
+        ];
         console.log(Gwenore.Space.getCurrentQuests());
+    }
+
+
+
+    private findRewardById(id: string): QuestReward[] {
+        for(const questtype of Object.keys(QuestConfig.types)){
+            const questType = QuestConfig.types[questtype as keyof typeof QuestConfig.types].rarities;
+            for(const rarity of questType){
+                const match = rarity.quests.findIndex(quest => quest.id === id);
+                if(match) return this.rewards[match];
+            }
+        }
+        return [];
     }
 
     private async handleDailyQuestComplete(result: ProcessResult){
@@ -31,9 +55,9 @@ export default class DailyQuestManager extends BaseManager {
         }
         // finally send notification to the valenia
         KafkaService.producer.send({
-            topic: "dailyquest_complete",
+            topic: "quest-complete",
             messages: [
-                {value: JSON.stringify(result)}
+                {value: JSON.stringify({...result, rewards: this.findRewardById(result.quest.id)})}
             ]
         });
     }
