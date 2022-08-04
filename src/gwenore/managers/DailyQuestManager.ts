@@ -28,7 +28,6 @@ export default class DailyQuestManager extends BaseManager {
             [{type: 'item', itemid: 'mythic.itemscroll', amount: 1}, {type: 'item', itemid: 'mythic.gem-box', amount: 3}],
             [{type: 'item', itemid: 'ultimate.itemscroll', amount: 1}, {type: 'item', itemid: 'ultimate.gem-box', amount: 3}]
         ];
-        console.log(Gwenore.Space.getCurrentQuests());
     }
 
 
@@ -38,7 +37,7 @@ export default class DailyQuestManager extends BaseManager {
             const questType = QuestConfig.types[questtype as keyof typeof QuestConfig.types].rarities;
             for(const rarity of questType){
                 const match = rarity.quests.findIndex(quest => quest.id === id);
-                if(match) return this.rewards[match];
+                if(match !== -1) return this.rewards[questType.indexOf(rarity)];
             }
         }
         return [];
@@ -89,6 +88,7 @@ export default class DailyQuestManager extends BaseManager {
             questList[randomKey] = {type: randomKey, ...QuestConfig.types[randomKey].rarities[i].quests[randomized]};
         }
         Gwenore.Space.setCurrentQuests(questList);
+        ServiceLogger.log(LOGTYPE.INFO, `Generated new daily quests for today.`, questList);
         return questList;
     }
 
@@ -99,7 +99,6 @@ export default class DailyQuestManager extends BaseManager {
 
             // we must set only one quest if player doesnt have any
             const playerPremium = await Gwenore.getPlayerPremiumStatus(player);
-            console.log({playerPremium});
             // if player has premium subscription we must set quests up to his type of rarity
 
             const settingQuests: Record<string, unknown> = {};

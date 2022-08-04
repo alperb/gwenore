@@ -26,7 +26,6 @@ export default class CollectItemProcessor extends BaseProcessor {
 
     private getItemCountByRarity(): number {
         const requiredRarity = this.getRarityIndex();
-        console.log({event: (this.event.data as CollectItemEventData).rewards});
         return (this.event.data as CollectItemEventData).rewards.reduce((acc, reward) => {
             if((requiredRarity === reward.item.rarity) && (reward.item.type === ITEMTYPE.ARMOR || reward.item.type === ITEMTYPE.WEAPON)){
                 return acc + ((reward.count as number) ?? 1);

@@ -41,7 +41,6 @@ export default abstract class BaseProcessor {
 
         // data comes a little bit unorganized so we need to sum it up
         const increment = this.getIncrementInTermsOfQuest();
-        console.log({increment});
 
         // set the new progress to redis
         const newProgress = current + increment;

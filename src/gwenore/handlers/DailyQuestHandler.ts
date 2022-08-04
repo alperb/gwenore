@@ -36,7 +36,6 @@ export default class DailyQuestHandler extends BaseHandler {
                 if(r.result === RESULTS.SUCCESS_WITH_REWARD){
                     Gwenore.Events.emit("dailyquestComplete", r);
                 }
-                console.log({r});
             }
         }
     }

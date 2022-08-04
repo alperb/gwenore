@@ -19,7 +19,6 @@ export default class GwenoreServiceHandler {
         try{
             const snowflake = (req.request.snowflake as string);
             const quests = await Gwenore.managers['dailyquest'].getQuests({ snowflake });
-            console.log(quests);
             if(quests.result === 'success'){
                 const questArr: QuestProgress[] = [];
                 for(const key of Object.keys(quests.quests as Record<string, SerializableQuest>)){
