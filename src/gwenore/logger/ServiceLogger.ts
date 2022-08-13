@@ -16,22 +16,22 @@ export default class ServiceLogger {
 
     static print(log: Log) {
         const time = moment(log.time).format('YYYY-MM-DD HH:mm:ss');
-        let printing = `${chalk.bold.gray('[' + time + ']')} `;
+        let printing = `${chalk.bold.gray('[' + time + ']')}`;
         switch (log.type) {
             case LOGTYPE.INFO:
-                printing += log.message;
+                printing += `${chalk.bold.gray('[INFO]')} ` + log.message;
                 break;
             case LOGTYPE.ERROR:
-                printing += chalk.red(log.message);
+                printing += `${chalk.bold.red('[ERROR]')} ` + chalk.red(log.message);
                 break;
             case LOGTYPE.WARN:
-                printing += chalk.yellow(log.message);
+                printing += `${chalk.bold.yellow('[WARN]')} ` + chalk.yellow(log.message);
                 break;
             case LOGTYPE.DEBUG:
-                printing += chalk.bgGray(log.message);
+                printing += `${chalk.bold.gray('[DEBUG]')} ` + chalk.bgGray(log.message);
                 break;
             default:
-                printing += log.message;
+                printing += `${chalk.bold.gray('[DEFAULT]')} ` + log.message;
                 break;
         }
         if(log.details && log.details.length > 0){
