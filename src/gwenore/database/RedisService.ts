@@ -7,15 +7,31 @@ export default class RedisService {
     static client: RedisClientType;
     static isConnected = false;
 
+    private static registerListeners(){
+        RedisService.client.on('error', err => {
+            ServiceLogger.log(LOGTYPE.ERROR, `Redis client connection error`, err);
+            RedisService.isConnected = false;
+            RedisService.connect();
+        });
+        RedisService.client.on('reconnecting', param => ServiceLogger.log(LOGTYPE.INFO, `Redis client initiates reconnecting, attemp ${param.attempt}`));
+        RedisService.client.on('connect', () => ServiceLogger.log(LOGTYPE.INFO, `Redis client status became: connected`));
+        RedisService.client.on('ready', () => ServiceLogger.log(LOGTYPE.INFO, `Redis client status became: ready`));
+        RedisService.client.on('end', () => ServiceLogger.log(LOGTYPE.INFO, `Redis client status became: disconnected`));
+    }
+
     static async connect(){
         try{
             if(!RedisService.isConnected){
-
+                
                 RedisService.client = createClient({
                     url: process.env.REDIS_URI as string,
                 });
+                RedisService.registerListeners();
                 await RedisService.client.connect();
-                RedisService.client.on('error', (err: unknown) => ServiceLogger.log(LOGTYPE.ERROR, `Redis client connection failed`, err));
+
+                // RedisService.client.on('error', (err: unknown) => {
+                    // RedisService.connect();
+                // });
 
                 RedisService.isConnected = true;
                 ServiceLogger.log(LOGTYPE.INFO, "Redis connected");
@@ -27,7 +43,7 @@ export default class RedisService {
     }
 
     static async get(key: string): Promise<string> {
-        if(!RedisService.client){
+        if(!RedisService.isConnected){
             await RedisService.connect();
         }
         return (await RedisService.client.get(key)) as string;
@@ -38,7 +54,7 @@ export default class RedisService {
      * format to save global data: global_{character_id}_{event_name}
      */
     static async set(key: string, data: string, shouldExpire = true): Promise<void> {
-        if(!RedisService.client){
+        if(!RedisService.isConnected){
             await RedisService.connect();
         }
         await RedisService.client.set(key, data, shouldExpire ? {'EX': RedisService.getSecondsLeftTomorrow()} : {});
