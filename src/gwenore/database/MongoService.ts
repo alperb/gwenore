@@ -42,7 +42,7 @@ export default class MongoService {
         const db = await MongoService.getInstance();
         const collection = db.db('valenia').collection('players');
         const playerData = await collection.findOne({snowflake: player.snowflake});
-        return (playerData as IPlayer).subscription.isActive ? (playerData as WithId<IPlayer>).subscription.current.type : -1;
+        return (playerData as IPlayer).subscription.isActive ? (playerData as IPlayer).subscription.current.type : -1;
     }
 
 }
