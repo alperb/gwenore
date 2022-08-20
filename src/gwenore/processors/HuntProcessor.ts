@@ -20,7 +20,6 @@ export default class HuntProcessor extends BaseProcessor {
     }
 
     private getIncrementCountById(){
-        const currentId = (this.event.data as HuntEventData).mob.id;
         const currentId = (this.event.data as HuntEventData).mob.mobid;
         const questId = this.quest.id.split('.')[2];
         return (currentId === questId ? 1 : 0);
