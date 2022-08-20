@@ -16,7 +16,7 @@ const initializationProcesses = [
     service.start(),
     KafkaService.connect(),
     KafkaService.createProducer(),
-    KafkaService.createTestProducer()
+    // KafkaService.createTestProducer()
 ];
 
 Promise.all(initializationProcesses).then(() => {
