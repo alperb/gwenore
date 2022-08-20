@@ -23,8 +23,13 @@ Promise.all(initializationProcesses).then(() => {
     KafkaService.consumer.run({
         eachMessage: async ({ message }) => {
             const request: QuestCountRequest = JSON.parse((message.value as Buffer).toString());
-            ServiceLogger.log(LOGTYPE.INFO, `Received request for event (${request.event.name}) for snowflake (${request.event.snowflake})`);
-            Gwenore.process(request);
+            try{
+                ServiceLogger.log(LOGTYPE.INFO, `Received request for event (${request.event.name}) for snowflake (${request.event.snowflake})`);
+                Gwenore.process(request);
+            }
+            catch(e){
+                ServiceLogger.log(LOGTYPE.ERROR, `Process failed for event (${request.event.name}) for snowflake (${request.event.snowflake}) with error: `, e);
+            }
         },
     })
 })
