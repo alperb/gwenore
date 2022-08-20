@@ -67,7 +67,7 @@ export default class DailyQuestManager extends BaseManager {
         const playerQuests = (await RedisService.get(quest_key)) !== null ? JSON.parse(await RedisService.get(quest_key)) : {};
 
         const playerLength = Object.keys(playerQuests).length; // 1
-        const currentLength = Object.keys(currentQuests).length; // 7
+        const currentLength = 4; // common, uncommon, rare, epic quests
         if(currentLength === playerLength) return; // if player has all quests he can't open any more
 
         const nextQuestKey = Object.keys(currentQuests)[playerLength];
